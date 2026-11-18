@@ -1,5 +1,5 @@
-import 'package:material_ui/material_ui.dart';
-// TODO: Impor drawer yang sudah dibuat sebelumnya
+import 'package:flutter/material.dart';
+import 'package:myportofolio_mobile/widgets/left_drawer.dart';
 
 class ProjectFormPage extends StatefulWidget {
   const ProjectFormPage({super.key});
@@ -30,14 +30,12 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Center(
-          child: Text(
-            'Add Project Form',
-          ),
+          child: Text('Add Project Form'),
         ),
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
       ),
-      // TODO: Tambahkan drawer yang sudah dibuat di sini
+      drawer: const LeftDrawer(),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
@@ -68,6 +66,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                   },
                 ),
               ),
+
               // === Description ===
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -156,6 +155,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                   },
                 ),
               ),
+
               // === Tombol Simpan ===
               Align(
                 alignment: Alignment.bottomCenter,
@@ -163,8 +163,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor:
-                          WidgetStateProperty.all(Colors.indigo),
+                      backgroundColor: WidgetStateProperty.all(Colors.indigo),
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -173,6 +172,18 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                           builder: (context) {
                             return AlertDialog(
                               title: const Text('Proyek berhasil ditambahkan!'),
+                              content: SingleChildScrollView(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Nama Proyek: $_projectName'),
+                                    Text('Deskripsi: $_description'),
+                                    Text('Kategori: $_category'),
+                                    Text('Teknologi: $_technologies'),
+                                    Text('Tautan: $_projectLink'),
+                                  ],
+                                ),
+                              ),
                               actions: [
                                 TextButton(
                                   child: const Text('OK'),
