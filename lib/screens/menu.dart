@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
+import 'package:myportofolio_mobile/widgets/experience_card.dart';
 import 'package:myportofolio_mobile/widgets/project_card.dart';
 import 'package:myportofolio_mobile/theme/app_colors.dart';
 
@@ -14,6 +15,7 @@ class MyHomePage extends StatelessWidget {
   final List<ItemHomepage> items = [
     ItemHomepage("Lihat Proyek", Icons.folder, AppColors.primary500),
     ItemHomepage("Tambah Proyek", Icons.add_circle, AppColors.secondary500),
+    ItemHomepage("Add Experience", Icons.work_outline, AppColors.primary500),
     ItemHomepage("Logout", Icons.logout, AppColors.secondary500),
   ];
 
@@ -73,6 +75,13 @@ class MyHomePage extends StatelessWidget {
                     // shrinkWrap agar ukuran kisi menyesuaikan tinggi konten anak.
                     shrinkWrap: true,
                     children: items.map((ItemHomepage item) {
+                      if (item.name == "Add Experience") {
+                        return ExperienceCard(
+                          title: item.name,
+                          icon: item.icon,
+                          color: item.color,
+                        );
+                      }
                       return ItemCard(item);
                     }).toList(),
                   ),
