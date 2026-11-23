@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
-import 'package:myportofolio_mobile/screens/project_form.dart';
+import 'package:myportofolio_mobile/widgets/experience_card.dart';
 import 'package:myportofolio_mobile/widgets/project_card.dart';
+import 'package:myportofolio_mobile/theme/app_colors.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -11,9 +12,10 @@ class MyHomePage extends StatelessWidget {
   final String kelas = "PBP E";
 
   final List<ItemHomepage> items = [
-    ItemHomepage("Lihat Proyek", Icons.folder, Colors.white60),
-    ItemHomepage("Tambah Proyek", Icons.add_circle, Colors.blue),
-    ItemHomepage("Logout", Icons.logout, Colors.deepOrangeAccent),
+    ItemHomepage("Lihat Proyek", Icons.folder, AppColors.primary500),
+    ItemHomepage("Tambah Proyek", Icons.add_circle, AppColors.secondary500),
+    ItemHomepage("Add Experience", Icons.work_outline, AppColors.primary500),
+    ItemHomepage("Logout", Icons.logout, AppColors.secondary500),
   ];
 
   @override
@@ -72,6 +74,13 @@ class MyHomePage extends StatelessWidget {
                     // shrinkWrap agar ukuran kisi menyesuaikan tinggi konten anak.
                     shrinkWrap: true,
                     children: items.map((ItemHomepage item) {
+                      if (item.name == "Add Experience") {
+                        return ExperienceCard(
+                          title: item.name,
+                          icon: item.icon,
+                          color: item.color,
+                        );
+                      }
                       return ItemCard(item);
                     }).toList(),
                   ),
@@ -97,6 +106,7 @@ class InfoCard extends StatelessWidget {
     return Card(
       // Memberikan efek bayangan kartu elevasi 2 unit.
       elevation: 2.0,
+      color: AppColors.secondary900,
       child: Container(
         // Menyesuaikan lebar kartu dengan proporsi layar (dibagi 3.5).
         width: MediaQuery.of(context).size.width / 3.5,
@@ -104,9 +114,15 @@ class InfoCard extends StatelessWidget {
         // Menyusun teks title dan content secara vertikal.
         child: Column(
           children: [
-            Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(
+              title,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: AppColors.secondary100,
+              ),
+            ),
             const SizedBox(height: 8.0),
-            Text(content),
+            Text(content, style: const TextStyle(color: AppColors.text)),
           ],
         ),
       ),
