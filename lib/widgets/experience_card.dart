@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myportofolio_mobile/screens/experience_form.dart';
+import 'package:myportofolio_mobile/widgets/auth_guard.dart';
 
 class ExperienceCard extends StatelessWidget {
   final String title;
@@ -20,12 +21,11 @@ class ExperienceCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
-        onTap: () {
+        onTap: () async {
+          if (!await ensureLoggedIn(context) || !context.mounted) return;
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => const ExperienceFormPage(),
-            ),
+            MaterialPageRoute(builder: (context) => const ExperienceFormPage()),
           );
         },
         child: Padding(

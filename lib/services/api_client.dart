@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:myportofolio_mobile/config.dart';
 import 'package:myportofolio_mobile/models/project.dart';
 
-/// Exception thrown when an API request returns a non-2xx status code.
+/// Exception thrown when an API request fails or returns an unexpected status.
 class ApiException implements Exception {
   const ApiException(this.statusCode, this.message);
 
@@ -46,7 +46,7 @@ class ApiClient {
     // - headers: Accept, Content-Type (application/json; charset=UTF-8),
     //   and Authorization ('Token $token')
     // - body: jsonEncode(project.toJson())
-    // Call _ensureSuccess(response), decode the JSON object, and return Project.fromJson(...)
+    // Require 201 Created, then decode and return the created project.
     final response = await _client.post(
       _uri('/api/v1/projects/'),
       headers: {
@@ -56,7 +56,7 @@ class ApiClient {
       },
       body: jsonEncode(project.toJson()),
     );
-    _ensureSuccess(response);
+    _ensureSuccess(response, expectedStatus: 201);
     final decoded = jsonDecode(response.body) as Map<String, dynamic>;
     return Project.fromJson(decoded);
   }
@@ -97,8 +97,10 @@ class ApiClient {
     _ensureSuccess(response);
   }
 
-  void _ensureSuccess(http.Response response) {
-    if (response.statusCode >= 200 && response.statusCode < 300) {
+  void _ensureSuccess(http.Response response, {int? expectedStatus}) {
+    if (response.statusCode >= 200 &&
+        response.statusCode < 300 &&
+        (expectedStatus == null || response.statusCode == expectedStatus)) {
       return;
     }
     throw ApiException(response.statusCode, response.body);
