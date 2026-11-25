@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
-import 'package:myportofolio_mobile/theme/app_theme.dart';
-import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/services/api_client.dart';
 import 'package:myportofolio_mobile/services/auth_state.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +25,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         // ... existing title and theme configuration ...
-        home: MyHomePage(),
+        home: const MyHomePage(),
       ),
     );
   }

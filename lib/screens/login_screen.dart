@@ -35,9 +35,9 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.pop(context, true);
     } on ApiException catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Login failed: ${e.statusCode}')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Login failed: ${e.statusCode}')));
     } finally {
       setState(() {
         _isSubmitting = false;

@@ -110,7 +110,9 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Gagal membuat proyek (${error.statusCode}).')),
+          SnackBar(
+            content: Text('Gagal membuat proyek (${error.statusCode}).'),
+          ),
         );
       }
     }
@@ -119,11 +121,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text('Add Project Form'),
-        ),
-      ),
+      appBar: AppBar(title: const Center(child: Text('Add Project Form'))),
       drawer: const LeftDrawer(),
       body: Form(
         key: _formKey,

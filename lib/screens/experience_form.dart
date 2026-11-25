@@ -89,9 +89,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(child: Text('Add Experience Form')),
-      ),
+      appBar: AppBar(title: const Center(child: Text('Add Experience Form'))),
       drawer: const LeftDrawer(),
       body: Form(
         key: _formKey,
@@ -318,9 +316,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                     onPressed: () {
                       Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => MyHomePage(),
-                        ),
+                        MaterialPageRoute(builder: (context) => MyHomePage()),
                         (route) => false,
                       );
                     },

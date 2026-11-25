@@ -18,7 +18,8 @@ class Project {
 
   // TODO: Implement factory Project.fromJson(Map<String, dynamic> json)
   // delegating to _$ProjectFromJson(json)
-  factory Project.fromJson(Map<String, dynamic> json) => _$ProjectFromJson(json);
+  factory Project.fromJson(Map<String, dynamic> json) =>
+      _$ProjectFromJson(json);
 
   @JsonKey(includeToJson: false)
   final String? id;
@@ -33,5 +34,4 @@ class Project {
 
   // TODO: Implement Map<String, dynamic> toJson() delegating to _$ProjectToJson(this)
   Map<String, dynamic> toJson() => _$ProjectToJson(this);
-  
 }
